@@ -16,6 +16,9 @@ public class Main {
             e.printStackTrace();
         }
         
+        
+        
+        
           FrmLogin frmLogin = new FrmLogin();
           frmLogin.setVisible(true);
     }
