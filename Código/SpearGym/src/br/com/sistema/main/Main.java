@@ -14,7 +14,9 @@ public class Main {
             UIManager.setLookAndFeel("javax.swing.plaf.nimbus.NimbusLookAndFeel");
         } catch (Exception e) {
             e.printStackTrace();
-        }
+        
+            
+            
         
         
           FrmLogin frmLogin = new FrmLogin();
