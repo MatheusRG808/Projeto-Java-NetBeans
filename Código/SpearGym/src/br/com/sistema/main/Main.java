@@ -17,8 +17,6 @@ public class Main {
         }
         
         
-        
-        
           FrmLogin frmLogin = new FrmLogin();
           frmLogin.setVisible(true);
     }
