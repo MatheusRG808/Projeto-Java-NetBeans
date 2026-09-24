@@ -27,7 +27,6 @@ public class Constantes {
         DIAS_SEMANA.put("domingo", "Domingo");
     }
 
-    /** Grupo muscular -> exercícios pré-cadastrados daquele grupo (RF07-RF08). */
     public static final Map<String, List<String>> GRUPOS_EXERCICIOS = new LinkedHashMap<>();
 
     static {
