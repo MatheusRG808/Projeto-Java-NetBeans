@@ -1,23 +1,16 @@
 package br.com.sistema.main;
-
+ 
+import br.com.sistema.utils.UiTheme;
 import br.com.sistema.view.FrmLogin;
-import javax.swing.UIManager;
-
-/**
-// *
- * @author Prof.Darlon Franklin
- */
+import javax.swing.SwingUtilities;
+ 
 public class Main {
-
+ 
     public static void main(String[] args) {
-        try {
-            UIManager.setLookAndFeel("javax.swing.plaf.nimbus.NimbusLookAndFeel");
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        
-          FrmLogin frmLogin = new FrmLogin();
-          frmLogin.setVisible(true);
+        UiTheme.aplicarTemaNimbus();
+        SwingUtilities.invokeLater(() -> {
+            FrmLogin login = new FrmLogin();
+            login.setVisible(true);
+        });
     }
-
 }
