@@ -46,4 +46,8 @@ public class Usuario {
     public String toString() {
         return usuario;
     }
+
+    public String getNome() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
 }

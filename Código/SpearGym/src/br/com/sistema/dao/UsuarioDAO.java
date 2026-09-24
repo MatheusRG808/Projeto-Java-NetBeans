@@ -9,31 +9,33 @@ import java.sql.SQLException;
 
 public class UsuarioDAO {
 
-    public Usuario login(String usuario, String senha) {
-
-        String sql = "SELECT id, usuario, senha FROM usuarios WHERE email = ? AND senha = ?";
+    // 1. Método para autenticar no Login (chamado pela telaLogin.java)
+    public Usuario efetuarLogin(String usuario, String senha) {
+        String sql = "SELECT id, usuario, senha FROM usuarios WHERE usuario = ? AND senha = ?";
 
         try {
             Connection conn = ConnectionFactory.getConnection();
             PreparedStatement stmt = conn.prepareStatement(sql);
             stmt.setString(1, usuario);
             stmt.setString(2, senha);
+
             ResultSet result = stmt.executeQuery();
             if (result.next()) {
                 Usuario u = new Usuario();
                 u.setId(result.getInt("id"));
-                u.setUsuario(result.getString("email"));
+                u.setUsuario(result.getString("usuario"));
                 u.setSenha(result.getString("senha"));
                 return u;
             }
         } catch (SQLException e) {
-            System.err.println("Erro: " + e.getMessage());
+            System.err.println("Erro ao efetuar login: " + e.getMessage());
         }
         return null;
     }
-    
-    public void salvar(Usuario usuario) {
-        String sql = "INSERT INTO usuarios " + "(usuario, senha) " + "VALUES (?, ?)";
+
+    // 2. Método para cadastrar usuário (chamado pela telaCadastroUsuario.java)
+    public void cadastrarUsuario(Usuario usuario) {
+        String sql = "INSERT INTO usuarios (usuario, senha) VALUES (?, ?)";
 
         try {
             Connection con = ConnectionFactory.getConnection();
@@ -43,9 +45,10 @@ public class UsuarioDAO {
             stmt.setString(2, usuario.getSenha());
 
             stmt.executeUpdate();
+            stmt.close();
 
         } catch (SQLException erro) {
-            System.out.println("Erro ao salvar usuario: " + erro.getMessage());
+            System.err.println("Erro ao salvar usuário: " + erro.getMessage());
         }
-    } 
+    }
 }
