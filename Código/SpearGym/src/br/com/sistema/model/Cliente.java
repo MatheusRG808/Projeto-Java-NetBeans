@@ -3,10 +3,6 @@ package br.com.sistema.model;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 
-/**
- *
- * @author mack0
- */
 public class Cliente {
 
     private int id;
