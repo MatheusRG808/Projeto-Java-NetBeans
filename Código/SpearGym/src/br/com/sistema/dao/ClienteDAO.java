@@ -162,6 +162,8 @@ public class ClienteDAO {
     }
     
     
+    
+    
     public void excluir(int id) {
 
         String sql = "DELETE FROM clientes WHERE id = ?";
