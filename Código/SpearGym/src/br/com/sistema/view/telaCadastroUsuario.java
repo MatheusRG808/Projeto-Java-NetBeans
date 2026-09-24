@@ -158,7 +158,7 @@ public class telaCadastroUsuario extends javax.swing.JFrame {
 
         JOptionPane.showMessageDialog(this, "Usuário cadastrado com sucesso!");
 
-        // 4. Limpar os campos
+   
         txtUsuario.setText("");
         txtSenha.setText("");
         txtUsuario.requestFocus();

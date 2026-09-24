@@ -160,7 +160,8 @@ public class ClienteDAO {
                     + erro.getMessage());
         }
     }
-
+    
+    
     public void excluir(int id) {
 
         String sql = "DELETE FROM clientes WHERE id = ?";

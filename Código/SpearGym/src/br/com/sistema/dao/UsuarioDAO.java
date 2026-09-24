@@ -13,6 +13,7 @@ public class UsuarioDAO {
     public Usuario efetuarLogin(String usuario, String senha) {
         String sql = "SELECT id, usuario, senha FROM usuarios WHERE usuario = ? AND senha = ?";
 
+        
         try {
             Connection conn = ConnectionFactory.getConnection();
             PreparedStatement stmt = conn.prepareStatement(sql);
