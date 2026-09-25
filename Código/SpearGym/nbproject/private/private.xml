@@ -5,6 +5,18 @@
         <group>
             <file>file:/C:/Users/mack0/OneDrive/Documentos/Projeto%20Spear%20Gym/Projeto-Java-NetBeans/Código/SpearGym/src/br/com/sistema/jdbc/ConnectionFactory.java</file>
             <file>file:/C:/Users/mack0/OneDrive/Documentos/Projeto%20Spear%20Gym/Projeto-Java-NetBeans/Código/SpearGym/src/br/com/sistema/main/Main.java</file>
+            <file>file:/C:/Users/mack0/OneDrive/Documentos/Projeto%20Spear%20Gym/Projeto-Java-NetBeans/Código/SpearGym/src/br/com/sistema/model/Cliente.java</file>
+            <file>file:/C:/Users/mack0/OneDrive/Documentos/Projeto%20Spear%20Gym/Projeto-Java-NetBeans/Código/SpearGym/src/br/com/sistema/model/Usuario.java</file>
+            <file>file:/C:/Users/mack0/OneDrive/Documentos/Projeto%20Spear%20Gym/Projeto-Java-NetBeans/Código/SpearGym/src/br/com/sistema/model/FichaTreino.java</file>
+            <file>file:/C:/Users/mack0/OneDrive/Documentos/Projeto%20Spear%20Gym/Projeto-Java-NetBeans/Código/SpearGym/src/br/com/sistema/dao/FichaTreinoDAO.java</file>
+            <file>file:/C:/Users/mack0/OneDrive/Documentos/Projeto%20Spear%20Gym/Projeto-Java-NetBeans/Código/SpearGym/src/br/com/sistema/model/DiaTreino.java</file>
+            <file>file:/C:/Users/mack0/OneDrive/Documentos/Projeto%20Spear%20Gym/Projeto-Java-NetBeans/Código/SpearGym/src/br/com/sistema/dao/ClienteDAO.java</file>
+            <file>file:/C:/Users/mack0/OneDrive/Documentos/Projeto%20Spear%20Gym/Projeto-Java-NetBeans/Código/SpearGym/src/br/com/sistema/dao/UsuarioDAO.java</file>
+            <file>file:/C:/Users/mack0/OneDrive/Documentos/Projeto%20Spear%20Gym/Projeto-Java-NetBeans/Código/SpearGym/src/br/com/sistema/utils/ValidacaoUtil.java</file>
+            <file>file:/C:/Users/mack0/OneDrive/Documentos/Projeto%20Spear%20Gym/Projeto-Java-NetBeans/Código/SpearGym/src/br/com/sistema/image/buscar.png</file>
+            <file>file:/C:/Users/mack0/OneDrive/Documentos/Projeto%20Spear%20Gym/Projeto-Java-NetBeans/Código/SpearGym/src/br/com/sistema/utils/TreinoJsonUtil.java</file>
+            <file>file:/C:/Users/mack0/OneDrive/Documentos/Projeto%20Spear%20Gym/Projeto-Java-NetBeans/Código/SpearGym/src/br/com/sistema/utils/Constantes.java</file>
+            <file>file:/C:/Users/mack0/OneDrive/Documentos/Projeto%20Spear%20Gym/Projeto-Java-NetBeans/Código/SpearGym/src/br/com/sistema/view/FrmFichaTreino.java</file>
         </group>
     </open-files>
 </project-private>

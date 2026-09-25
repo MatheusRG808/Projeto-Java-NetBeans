@@ -14,6 +14,14 @@ import java.util.List;
 public class ClienteDAO {
 
     public void salvar(Cliente cliente) {
+        if (cliente.getId() == 0) {
+            inserir(cliente);
+        } else {
+            atualizar(cliente);
+        }
+    }
+
+     private void inserir(Cliente cliente) {
 
         String sql = "INSERT INTO clientes "
                 + "(nome, cpf, data_nascimento, telefone, email, endereco) "
@@ -25,27 +33,34 @@ public class ClienteDAO {
 
             stmt.setString(1, cliente.getNome());
             stmt.setString(2, cliente.getCpf());
-            stmt.setDate(3, Date.valueOf(cliente.getDataNascimento()));
+            stmt.setDate(
+                    3,
+                    Date.valueOf(cliente.getDataNascimento())
+            );
             stmt.setString(4, cliente.getTelefone());
             stmt.setString(5, cliente.getEmail());
             stmt.setString(6, cliente.getEndereco());
 
             stmt.executeUpdate();
 
+            stmt.close();
+            con.close();
+
         } catch (SQLException erro) {
-            System.out.println("Erro ao salvar cliente: "
-                    + erro.getMessage());
+
+            System.out.println(
+                    "Erro ao inserir cliente: "
+                    + erro.getMessage()
+            );
         }
     }
 
+    
     public List<Cliente> pesquisarPorNome(String nome) {
 
         List<Cliente> clientes = new ArrayList<>();
 
-        String sql = "SELECT * FROM clientes "
-                + "WHERE LOWER(nome) LIKE LOWER(?) "
-                + "OR cpf LIKE ? "
-                + "ORDER BY nome";
+        String sql = "SELECT * FROM clientes " + "WHERE LOWER(nome) LIKE LOWER(?) " + "OR cpf LIKE ? " + "ORDER BY nome";
 
         try {
             Connection con = ConnectionFactory.getConnection();
@@ -80,8 +95,7 @@ public class ClienteDAO {
             }
 
         } catch (SQLException erro) {
-            System.out.println("Erro ao pesquisar cliente: "
-                    + erro.getMessage());
+            System.out.println("Erro ao pesquisar cliente: " + erro.getMessage());
         }
 
         return clientes;
@@ -123,23 +137,61 @@ public class ClienteDAO {
             }
 
         } catch (SQLException erro) {
-            System.out.println("Erro ao listar clientes: "
-                    + erro.getMessage());
+            System.out.println("Erro ao listar clientes: " + erro.getMessage());
         }
 
         return clientes;
     }
 
+    /**
+     * Busca um único cliente pelo id (usado para mostrar o nome do
+     * cliente na tela de ficha de treino).
+     */
+    public Cliente buscarPorId(int id) {
+
+        String sql = "SELECT * FROM clientes WHERE id = ?";
+
+        try {
+            Connection con = ConnectionFactory.getConnection();
+            PreparedStatement stmt = con.prepareStatement(sql);
+
+            stmt.setInt(1, id);
+
+            ResultSet rs = stmt.executeQuery();
+
+            Cliente cliente = null;
+
+            if (rs.next()) {
+                cliente = new Cliente();
+                cliente.setId(rs.getInt("id"));
+                cliente.setNome(rs.getString("nome"));
+                cliente.setCpf(rs.getString("cpf"));
+                cliente.setDataNascimento(rs.getDate("data_nascimento").toLocalDate());
+                cliente.setTelefone(rs.getString("telefone"));
+                cliente.setEmail(rs.getString("email"));
+                cliente.setEndereco(rs.getString("endereco"));
+
+                Timestamp timestamp = rs.getTimestamp("criado_em");
+                if (timestamp != null) {
+                    cliente.setCriadoEm(timestamp.toLocalDateTime());
+                }
+            }
+
+            rs.close();
+            stmt.close();
+            con.close();
+
+            return cliente;
+
+        } catch (SQLException erro) {
+            System.out.println("Erro ao buscar cliente: " + erro.getMessage());
+            return null;
+        }
+    }
+
     public void atualizar(Cliente cliente) {
 
-        String sql = "UPDATE clientes SET "
-                + "nome = ?, "
-                + "cpf = ?, "
-                + "data_nascimento = ?, "
-                + "telefone = ?, "
-                + "email = ?, "
-                + "endereco = ? "
-                + "WHERE id = ?";
+        String sql = "UPDATE clientes SET " + "nome = ?, " + "cpf = ?, " + "data_nascimento = ?, " + "telefone = ?, " + "email = ?, " + "endereco = ? " + "WHERE id = ?";
 
         try {
             Connection con = ConnectionFactory.getConnection();
@@ -156,8 +208,7 @@ public class ClienteDAO {
             stmt.executeUpdate();
 
         } catch (SQLException erro) {
-            System.out.println("Erro ao atualizar cliente: "
-                    + erro.getMessage());
+            System.out.println("Erro ao atualizar cliente: " + erro.getMessage());
         }
     }
 
@@ -174,8 +225,7 @@ public class ClienteDAO {
             stmt.executeUpdate();
 
         } catch (SQLException erro) {
-            System.out.println("Erro ao excluir cliente: "
-                    + erro.getMessage());
+            System.out.println("Erro ao excluir cliente: " + erro.getMessage());
         }
     }
 }

@@ -1,63 +1,51 @@
 package br.com.sistema.utils;
 
 import br.com.sistema.model.DiaTreino;
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
+
+import java.lang.reflect.Type;
 import java.util.LinkedHashMap;
-import java.util.List;
 import java.util.Map;
 
 public class TreinoJsonUtil {
 
+    private static final Gson GSON = new Gson();
+
     private TreinoJsonUtil() {
     }
 
+    /**
+     * Converte o treino da ficha para JSON.
+     */
     public static String paraJson(Map<String, DiaTreino> treino) {
-        Map<String, Object> raiz = new LinkedHashMap<>();
-        for (Map.Entry<String, DiaTreino> entrada : treino.entrySet()) {
-            DiaTreino dia = entrada.getValue();
-            Map<String, Object> diaJson = new LinkedHashMap<>();
-            diaJson.put("grupos", dia.getGrupos());
-            diaJson.put("exercicios", dia.getExercicios());
-            diaJson.put("descricao", dia.getDescricao() == null ? "" : dia.getDescricao());
-            raiz.put(entrada.getKey(), diaJson);
+
+        if (treino == null) {
+            return "{}";
         }
-        return JsonUtil.escrever(raiz);
+
+        return GSON.toJson(treino);
     }
 
-    @SuppressWarnings("unchecked")
+    /**
+     * Converte o JSON salvo no banco novamente para o
+     * Map<String, DiaTreino> utilizado pela FichaTreino.
+     */
     public static Map<String, DiaTreino> deJson(String json) {
-        Map<String, DiaTreino> treino = new LinkedHashMap<>();
-        if (json == null) {
-            return treino;
+
+        if (json == null || json.trim().isEmpty()) {
+            return new LinkedHashMap<>();
         }
-        Object raizObj = JsonUtil.ler(json);
-        if (!(raizObj instanceof Map)) {
-            return treino;
+
+        Type tipo = new TypeToken<Map<String, DiaTreino>>() {
+        }.getType();
+
+        Map<String, DiaTreino> treino = GSON.fromJson(json, tipo);
+
+        if (treino == null) {
+            return new LinkedHashMap<>();
         }
-        Map<String, Object> raiz = (Map<String, Object>) raizObj;
-        for (Map.Entry<String, Object> entrada : raiz.entrySet()) {
-            Object valor = entrada.getValue();
-            DiaTreino dia = new DiaTreino();
-            if (valor instanceof Map) {
-                Map<String, Object> diaJson = (Map<String, Object>) valor;
-                Object grupos = diaJson.get("grupos");
-                Object exercicios = diaJson.get("exercicios");
-                Object descricao = diaJson.get("descricao");
-                if (grupos instanceof List) {
-                    for (Object g : (List<Object>) grupos) {
-                        dia.getGrupos().add(String.valueOf(g));
-                    }
-                }
-                if (exercicios instanceof List) {
-                    for (Object e : (List<Object>) exercicios) {
-                        dia.getExercicios().add(String.valueOf(e));
-                    }
-                }
-                if (descricao != null) {
-                    dia.setDescricao(String.valueOf(descricao));
-                }
-            }
-            treino.put(entrada.getKey(), dia);
-        }
+
         return treino;
     }
 }
