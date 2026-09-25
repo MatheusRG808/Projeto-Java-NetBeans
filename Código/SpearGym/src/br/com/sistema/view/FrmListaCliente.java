@@ -321,7 +321,7 @@ public class FrmListaCliente extends javax.swing.JFrame {
         Cliente cliente = clienteDAO.buscarPorId(id);
 
         SwingUtilities.invokeLater(() -> {
-            FrmFichaTreino tela = new FrmFichaTreino(cliente);
+            FrmCliente tela = new FrmCliente(cliente);
             tela.setVisible(true);
         });
        

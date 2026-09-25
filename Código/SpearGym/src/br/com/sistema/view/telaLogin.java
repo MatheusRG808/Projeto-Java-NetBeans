@@ -9,12 +9,13 @@ package br.com.sistema.view;
  import br.com.sistema.dao.UsuarioDAO;
 import br.com.sistema.model.Usuario;
 import javax.swing.JOptionPane;
+import  br.com.sistema.view.telaPrincipal;
 
 public class telaLogin extends javax.swing.JFrame {
     
     public telaLogin() {
        initComponents();
-        this.setLocationRelativeTo(null);    }
+       this.setLocationRelativeTo(null);    }
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -132,16 +133,16 @@ public class telaLogin extends javax.swing.JFrame {
     private void efetuarLogin() {
         String usuario = txtUsuario.getText().trim();
         String senha = new String(txtSenha.getPassword()).trim();
-
+        
         try {
             UsuarioDAO dao = new UsuarioDAO();
             Usuario usuarioLogado = dao.efetuarLogin(usuario, senha);
 
             if (usuarioLogado != null) {
-                JOptionPane.showMessageDialog(this, "Bem-vindo(a), " + usuarioLogado.getNome() + "!");
+                JOptionPane.showMessageDialog(this, "Bem-vindo(a), " + usuarioLogado.getUsuario() + "!");
                 this.dispose();
 
-                FrmMenu frmMenu = new FrmMenu();
+                telaPrincipal frmMenu = new telaPrincipal();
                 frmMenu.setVisible(true);
             } else {
                 JOptionPane.showMessageDialog(this, "Usuário ou senha inválidos!");

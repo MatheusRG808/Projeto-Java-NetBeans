@@ -11,6 +11,8 @@ import java.sql.SQLException;
 import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.List;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 
 public class ClienteDAO {
 
@@ -19,8 +21,11 @@ public class ClienteDAO {
     // =========================================================
     
     public void salvar(Cliente cliente) {
-
-        if (cliente.getId() == 0) {
+        if (cliente == null) {
+            return;
+        }
+        
+        if (cliente.getId() == null || cliente.getId() == 0) {
             inserir(cliente);
         } else {
             atualizar(cliente);
@@ -30,6 +35,54 @@ public class ClienteDAO {
     // =========================================================
     // INSERIR
     // =========================================================
+    
+    public Cliente buscarPorCpf(String cpf) {
+
+        String sql =
+                "SELECT * FROM clientes "
+                + "WHERE cpf = ?";
+
+        try {
+            Connection con =
+                    ConnectionFactory.getConnection();
+
+            PreparedStatement stmt =
+                    con.prepareStatement(sql);
+
+            stmt.setString(
+                    1,
+                    cpf
+            );
+
+            ResultSet rs =
+                    stmt.executeQuery();
+
+            if (rs.next()) {
+
+                Cliente cliente =
+                        criarCliente(rs);
+
+                rs.close();
+                stmt.close();
+                con.close();
+
+                return cliente;
+            }
+
+            rs.close();
+            stmt.close();
+            con.close();
+
+        } catch (SQLException erro) {
+
+            System.out.println(
+                    "Erro ao buscar cliente: "
+                    + erro.getMessage()
+            );
+        }
+
+        return null;
+    }
 
     private void inserir(Cliente cliente) {
 
@@ -44,12 +97,35 @@ public class ClienteDAO {
             stmt.setString(1, cliente.getNome());
             stmt.setString(2, cliente.getCpf());
 
-            if (cliente.getDataNascimento() != null) {
-                stmt.setDate(
-                        3,
-                        Date.valueOf(cliente.getDataNascimento())
-                );
+            if (cliente.getDataNascimento() != null
+                    && !cliente.getDataNascimento().trim().isEmpty()) {
+
+                try {
+                    SimpleDateFormat formato =
+                            new SimpleDateFormat("dd/MM/yyyy");
+
+                    formato.setLenient(false);
+
+                    java.util.Date data =
+                            formato.parse(cliente.getDataNascimento().trim());
+
+                    stmt.setDate(
+                            3,
+                            new java.sql.Date(data.getTime())
+                    );
+
+                } catch (ParseException erro) {
+
+                    System.out.println(
+                            "Data de nascimento inválida: "
+                            + cliente.getDataNascimento()
+                    );
+
+                    return;
+                }
+
             } else {
+
                 stmt.setNull(
                         3,
                         java.sql.Types.DATE
@@ -96,12 +172,35 @@ public class ClienteDAO {
             stmt.setString(1, cliente.getNome());
             stmt.setString(2, cliente.getCpf());
 
-            if (cliente.getDataNascimento() != null) {
-                stmt.setDate(
-                        3,
-                        Date.valueOf(cliente.getDataNascimento())
-                );
+            if (cliente.getDataNascimento() != null
+                    && !cliente.getDataNascimento().trim().isEmpty()) {
+
+                try {
+                    SimpleDateFormat formato =
+                            new SimpleDateFormat("dd/MM/yyyy");
+
+                    formato.setLenient(false);
+
+                    java.util.Date data =
+                            formato.parse(cliente.getDataNascimento().trim());
+
+                    stmt.setDate(
+                            3,
+                            new java.sql.Date(data.getTime())
+                    );
+
+                } catch (ParseException erro) {
+
+                    System.out.println(
+                            "Data de nascimento inválida: "
+                            + cliente.getDataNascimento()
+                    );
+
+                    return;
+                }
+
             } else {
+
                 stmt.setNull(
                         3,
                         java.sql.Types.DATE
@@ -144,7 +243,7 @@ public class ClienteDAO {
                 "SELECT * FROM clientes "
                 + "WHERE LOWER(nome) LIKE LOWER(?) "
                 + "OR cpf LIKE ? "
-                + "ORDER BY nome";
+                + "ORDER BY id";
 
         try {
             Connection con =
@@ -293,57 +392,108 @@ public class ClienteDAO {
 
     public void excluir(int id) {
 
-        String sql =
-                "DELETE FROM clientes "
-                + "WHERE id = ?";
+       String sqlFichas =
+               "DELETE FROM fichas_treino "
+               + "WHERE cliente_id = ?";
 
-        try {
-            Connection con =
-                    ConnectionFactory.getConnection();
+       String sqlCliente =
+               "DELETE FROM clientes "
+               + "WHERE id = ?";
 
-            PreparedStatement stmt =
-                    con.prepareStatement(sql);
+       Connection con = null;
 
-            stmt.setInt(
-                    1,
-                    id
-            );
+       try {
+           con = ConnectionFactory.getConnection();
 
-            stmt.executeUpdate();
+           // Inicia a transação
+           con.setAutoCommit(false);
 
-            stmt.close();
-            con.close();
+           // 1. Exclui as fichas de treino do cliente
+           PreparedStatement stmtFichas =
+                   con.prepareStatement(sqlFichas);
 
-        } catch (SQLException erro) {
+           stmtFichas.setInt(1, id);
+           stmtFichas.executeUpdate();
+           stmtFichas.close();
 
-            System.out.println(
-                    "Erro ao excluir cliente: "
-                    + erro.getMessage()
-            );
-        }
+           // 2. Exclui o cliente
+           PreparedStatement stmtCliente =
+                   con.prepareStatement(sqlCliente);
+
+           stmtCliente.setInt(1, id);
+           stmtCliente.executeUpdate();
+           stmtCliente.close();
+
+           // Confirma tudo
+           con.commit();
+
+           con.close();
+
+       } catch (SQLException erro) {
+
+           try {
+               if (con != null) {
+                   con.rollback();
+                   con.close();
+               }
+           } catch (SQLException e) {
+               System.out.println(
+                       "Erro ao desfazer exclusão: "
+                       + e.getMessage()
+               );
+           }
+
+           System.out.println(
+                   "Erro ao excluir cliente: "
+                   + erro.getMessage()
+           );
+       }
     }
 
-    public void excluirPorCpf(String cpf) {
-        String sql =
-                "DELETE FROM clientes "
-                + "WHERE cpf = ?";
+    public boolean excluirPorCpf(String cpf) {
+        String sqlCliente = "SELECT id FROM clientes WHERE cpf = ?";
+        String sqlFichas = "DELETE FROM fichas_treino WHERE cliente_id = ?";
+        String sqlExcluir = "DELETE FROM clientes WHERE id = ?";
+
+        Connection con = null;
 
         try {
-            Connection con =
-                    ConnectionFactory.getConnection();
+            con = ConnectionFactory.getConnection();
 
-            PreparedStatement stmt =
-                    con.prepareStatement(sql);
+            // Procura o ID do cliente pelo CPF
+            PreparedStatement stmtCliente = con.prepareStatement(sqlCliente);
+            stmtCliente.setString(1, cpf);
 
-            stmt.setString(
-                    1,
-                    cpf
-            );
+            ResultSet rs = stmtCliente.executeQuery();
 
-            stmt.executeUpdate();
+            if (!rs.next()) {
+                rs.close();
+                stmtCliente.close();
+                con.close();
+                return false;
+            }
 
-            stmt.close();
+            int clienteId = rs.getInt("id");
+
+            rs.close();
+            stmtCliente.close();
+
+            // Exclui as fichas do cliente
+            PreparedStatement stmtFichas = con.prepareStatement(sqlFichas);
+            stmtFichas.setInt(1, clienteId);
+            stmtFichas.executeUpdate();
+            stmtFichas.close();
+
+            // Exclui o cliente
+            PreparedStatement stmtExcluir = con.prepareStatement(sqlExcluir);
+            stmtExcluir.setInt(1, clienteId);
+
+            int linhasAfetadas = stmtExcluir.executeUpdate();
+
+            stmtExcluir.close();
             con.close();
+
+            return linhasAfetadas > 0;
 
         } catch (SQLException erro) {
 
@@ -351,6 +501,8 @@ public class ClienteDAO {
                     "Erro ao excluir cliente: "
                     + erro.getMessage()
             );
+
+            return false;
         }
     }
     

@@ -5,6 +5,10 @@
  */
 package br.com.sistema.view;
 
+import br.com.sistema.view.FrmCliente;
+import br.com.sistema.view.FrmUsuario;
+import br.com.sistema.view.FrmListaCliente;
+
 /**
  *
  * @author Acer
@@ -16,6 +20,7 @@ public class telaPrincipal extends javax.swing.JFrame {
      */
     public telaPrincipal() {
         initComponents();
+        setLocationRelativeTo(null);
     }
 
     /**
@@ -34,6 +39,14 @@ public class telaPrincipal extends javax.swing.JFrame {
         jButton5 = new javax.swing.JButton();
         jButton6 = new javax.swing.JButton();
         jButton7 = new javax.swing.JButton();
+        jMenuBar1 = new javax.swing.JMenuBar();
+        menu = new javax.swing.JMenu();
+        menuCliente = new javax.swing.JMenuItem();
+        menuProduto = new javax.swing.JMenuItem();
+        menu2 = new javax.swing.JMenu();
+        menuCliente2 = new javax.swing.JMenuItem();
+        jMenu2 = new javax.swing.JMenu();
+        menuSair = new javax.swing.JMenuItem();
 
         jMenu3.setText("jMenu3");
 
@@ -70,12 +83,58 @@ public class telaPrincipal extends javax.swing.JFrame {
         });
 
         jButton7.setFont(new java.awt.Font("Times New Roman", 1, 18)); // NOI18N
-        jButton7.setText("Fichas de Treino");
+        jButton7.setText("Lista de Clientes");
         jButton7.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton7ActionPerformed(evt);
             }
         });
+
+        menu.setText("Cadastros");
+
+        menuCliente.setText("Cliente");
+        menuCliente.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                menuClienteActionPerformed(evt);
+            }
+        });
+        menu.add(menuCliente);
+
+        menuProduto.setText("Usuário");
+        menuProduto.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                menuProdutoActionPerformed(evt);
+            }
+        });
+        menu.add(menuProduto);
+
+        jMenuBar1.add(menu);
+
+        menu2.setText("Listagens");
+
+        menuCliente2.setText("Clientes Lista");
+        menuCliente2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                menuCliente2ActionPerformed(evt);
+            }
+        });
+        menu2.add(menuCliente2);
+
+        jMenuBar1.add(menu2);
+
+        jMenu2.setText("Opções");
+
+        menuSair.setText("Sair");
+        menuSair.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                menuSairActionPerformed(evt);
+            }
+        });
+        jMenu2.add(menuSair);
+
+        jMenuBar1.add(jMenu2);
+
+        setJMenuBar(jMenuBar1);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -108,7 +167,7 @@ public class telaPrincipal extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jButton5, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 58, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 35, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButton6, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jButton7, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -120,12 +179,12 @@ public class telaPrincipal extends javax.swing.JFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
-        new telaCadastroCliente().setVisible(true);
+        new FrmCliente(null).setVisible(true);
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
         // TODO add your handling code here:
-        new telaCadastroUsuario().setVisible(true);
+        new FrmUsuario().setVisible(true);
     }//GEN-LAST:event_jButton5ActionPerformed
 
     private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
@@ -136,8 +195,28 @@ public class telaPrincipal extends javax.swing.JFrame {
 
     private void jButton7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton7ActionPerformed
         // TODO add your handling code here:
-        new FrmMenu().setVisible(true);
+        new FrmListaCliente().setVisible(true);
     }//GEN-LAST:event_jButton7ActionPerformed
+
+    private void menuClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuClienteActionPerformed
+        FrmCliente frmCliente = new FrmCliente(null);
+        frmCliente.setVisible(true);
+    }//GEN-LAST:event_menuClienteActionPerformed
+
+    private void menuProdutoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuProdutoActionPerformed
+        FrmUsuario user = new FrmUsuario();
+        user.setVisible(true);
+    }//GEN-LAST:event_menuProdutoActionPerformed
+
+    private void menuSairActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuSairActionPerformed
+        this.dispose();
+        new telaLogin().setVisible(true);
+    }//GEN-LAST:event_menuSairActionPerformed
+
+    private void menuCliente2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuCliente2ActionPerformed
+        FrmListaCliente lista = new FrmListaCliente();
+        lista.setVisible(true);
+    }//GEN-LAST:event_menuCliente2ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -180,7 +259,15 @@ public class telaPrincipal extends javax.swing.JFrame {
     private javax.swing.JButton jButton6;
     private javax.swing.JButton jButton7;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JMenu jMenu2;
     private javax.swing.JMenu jMenu3;
     private javax.swing.JMenu jMenu4;
+    private javax.swing.JMenuBar jMenuBar1;
+    private javax.swing.JMenu menu;
+    private javax.swing.JMenu menu2;
+    private javax.swing.JMenuItem menuCliente;
+    private javax.swing.JMenuItem menuCliente2;
+    private javax.swing.JMenuItem menuProduto;
+    private javax.swing.JMenuItem menuSair;
     // End of variables declaration//GEN-END:variables
 }

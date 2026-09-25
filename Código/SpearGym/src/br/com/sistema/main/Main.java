@@ -1,6 +1,6 @@
 package br.com.sistema.main;
 
-import br.com.sistema.view.FrmListaCliente;
+import br.com.sistema.view.telaLogin;
 import javax.swing.SwingUtilities;
 
 public class Main {
@@ -9,7 +9,7 @@ public class Main {
 
         SwingUtilities.invokeLater(() -> {
 
-            FrmListaCliente tela = new FrmListaCliente();
+            telaLogin tela = new telaLogin();
 
             tela.setVisible(true);
         });
