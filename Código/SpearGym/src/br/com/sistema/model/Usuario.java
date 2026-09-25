@@ -1,53 +1,24 @@
 package br.com.sistema.model;
 
 public class Usuario {
-
     private int id;
-    private String usuario;
+    private String nome;
     private String senha;
-    private boolean ativo = true;
+    private String email;
 
-    public Usuario() {
-    }
+    public int getId() { return id; }
+    public void setId(int id) { this.id = id; }
 
-    public int getId() {
-        return id;
-    }
+    public String getNome() { return nome; }
+    public void setNome(String nome) { this.nome = nome; }
 
-    public void setId(int id) {
-        this.id = id;
-    }
+    public String getSenha() { return senha; }
+    public void setSenha(String senha) { this.senha = senha; }
 
-    public String getUsuario() {
-        return usuario;
-    }
+    public String getEmail() { return email; }
+    public void setEmail(String email) { this.email = email; }
 
-    public void setUsuario(String usuario) {
-        this.usuario = usuario;
-    }
-
-    public String getSenha() {
-        return senha;
-    }
-
-    public void setSenha(String senha) {
-        this.senha = senha;
-    }
-
-    public boolean isAtivo() {
-        return ativo;
-    }
-
-    public void setAtivo(boolean ativo) {
-        this.ativo = ativo;
-    }
-
-    @Override
-    public String toString() {
-        return usuario;
-    }
-
-    public String getNome() {
+    public void setAtivo(boolean b) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 }

@@ -1,184 +1,73 @@
 package br.com.sistema.dao;
 
-import br.com.sistema.jdbc.ConnectionFactory;
 import br.com.sistema.model.Cliente;
 import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
 import java.sql.Date;
-import java.sql.Timestamp;
-import java.util.ArrayList;
-import java.util.List;
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
 
 public class ClienteDAO {
+    private Connection conexao;
 
-    public void salvar(Cliente cliente) {
-
-        String sql = "INSERT INTO clientes "
-                + "(nome, cpf, data_nascimento, telefone, email, endereco) "
-                + "VALUES (?, ?, ?, ?, ?, ?)";
-
-        try {
-            Connection con = ConnectionFactory.getConnection();
-            PreparedStatement stmt = con.prepareStatement(sql);
-
-            stmt.setString(1, cliente.getNome());
-            stmt.setString(2, cliente.getCpf());
-            stmt.setDate(3, Date.valueOf(cliente.getDataNascimento()));
-            stmt.setString(4, cliente.getTelefone());
-            stmt.setString(5, cliente.getEmail());
-            stmt.setString(6, cliente.getEndereco());
-
-            stmt.executeUpdate();
-
-        } catch (SQLException erro) {
-            System.out.println("Erro ao salvar cliente: "
-                    + erro.getMessage());
-        }
+    public ClienteDAO() {
+        this.conexao = new ConnectionFactory().getConnection();
     }
 
-    public List<Cliente> pesquisarPorNome(String nome) {
-
-        List<Cliente> clientes = new ArrayList<>();
-
-        String sql = "SELECT * FROM clientes "
-                + "WHERE LOWER(nome) LIKE LOWER(?) "
-                + "OR cpf LIKE ? "
-                + "ORDER BY nome";
-
-        try {
-            Connection con = ConnectionFactory.getConnection();
-            PreparedStatement stmt = con.prepareStatement(sql);
-
-            stmt.setString(1, "%" + nome + "%");
-            stmt.setString(2, "%" + nome + "%");
-
-            ResultSet rs = stmt.executeQuery();
-
-            while (rs.next()) {
-
-                Cliente cliente = new Cliente();
-
-                cliente.setId(rs.getInt("id"));
-                cliente.setNome(rs.getString("nome"));
-                cliente.setCpf(rs.getString("cpf"));
-                cliente.setDataNascimento(
-                        rs.getDate("data_nascimento").toLocalDate()
-                );
-                cliente.setTelefone(rs.getString("telefone"));
-                cliente.setEmail(rs.getString("email"));
-                cliente.setEndereco(rs.getString("endereco"));
-
-                Timestamp timestamp = rs.getTimestamp("criado_em");
-
-                if (timestamp != null) {
-                    cliente.setCriadoEm(timestamp.toLocalDateTime());
-                }
-
-                clientes.add(cliente);
+    // 1. SALVAR / CADASTRAR
+    public void cadastrarCliente(Cliente obj) {
+        String sql = "INSERT INTO clientes (nome, cpf, data_nascimento, telefone, email, endereco) VALUES (?, ?, ?, ?, ?, ?)";
+        try (PreparedStatement stmt = conexao.prepareStatement(sql)) {
+            stmt.setString(1, obj.getNome());
+            stmt.setString(2, obj.getCpf());
+            
+            // Converte a String (AAAA-MM-DD) para o tipo DATE do PostgreSQL
+            if (obj.getDataNascimento() != null && !obj.getDataNascimento().trim().isEmpty()) {
+                stmt.setDate(3, Date.valueOf(obj.getDataNascimento().trim()));
+            } else {
+                stmt.setNull(3, java.sql.Types.DATE);
             }
 
-        } catch (SQLException erro) {
-            System.out.println("Erro ao pesquisar cliente: "
-                    + erro.getMessage());
-        }
+            stmt.setString(4, obj.getTelefone());
+            stmt.setString(5, obj.getEmail());
+            stmt.setString(6, obj.getEndereco());
 
-        return clientes;
+            stmt.execute();
+        } catch (SQLException e) {
+            throw new RuntimeException("Erro ao cadastrar cliente: " + e.getMessage(), e);
+        }
     }
 
-    public List<Cliente> listar() {
-
-        String sql = "SELECT * FROM clientes ORDER BY id";
-
-        List<Cliente> clientes = new ArrayList<>();
-
-        try {
-            Connection con = ConnectionFactory.getConnection();
-            PreparedStatement stmt = con.prepareStatement(sql);
-
-            ResultSet rs = stmt.executeQuery();
-
-            while (rs.next()) {
-
-                Cliente cliente = new Cliente();
-
-                cliente.setId(rs.getInt("id"));
-                cliente.setNome(rs.getString("nome"));
-                cliente.setCpf(rs.getString("cpf"));
-                cliente.setDataNascimento(
-                        rs.getDate("data_nascimento").toLocalDate()
-                );
-                cliente.setTelefone(rs.getString("telefone"));
-                cliente.setEmail(rs.getString("email"));
-                cliente.setEndereco(rs.getString("endereco"));
-
-                Timestamp timestamp = rs.getTimestamp("criado_em");
-
-                if (timestamp != null) {
-                    cliente.setCriadoEm(timestamp.toLocalDateTime());
-                }
-
-                clientes.add(cliente);
+    // 2. EDITAR / ALTERAR
+    public void editarCliente(Cliente obj) {
+        String sql = "UPDATE clientes SET nome = ?, data_nascimento = ?, telefone = ?, email = ?, endereco = ? WHERE cpf = ?";
+        try (PreparedStatement stmt = conexao.prepareStatement(sql)) {
+            stmt.setString(1, obj.getNome());
+            
+            if (obj.getDataNascimento() != null && !obj.getDataNascimento().trim().isEmpty()) {
+                stmt.setDate(2, Date.valueOf(obj.getDataNascimento().trim()));
+            } else {
+                stmt.setNull(2, java.sql.Types.DATE);
             }
 
-        } catch (SQLException erro) {
-            System.out.println("Erro ao listar clientes: "
-                    + erro.getMessage());
-        }
+            stmt.setString(3, obj.getTelefone());
+            stmt.setString(4, obj.getEmail());
+            stmt.setString(5, obj.getEndereco());
+            stmt.setString(6, obj.getCpf());
 
-        return clientes;
-    }
-
-    public void atualizar(Cliente cliente) {
-
-        String sql = "UPDATE clientes SET "
-                + "nome = ?, "
-                + "cpf = ?, "
-                + "data_nascimento = ?, "
-                + "telefone = ?, "
-                + "email = ?, "
-                + "endereco = ? "
-                + "WHERE id = ?";
-
-        try {
-            Connection con = ConnectionFactory.getConnection();
-            PreparedStatement stmt = con.prepareStatement(sql);
-
-            stmt.setString(1, cliente.getNome());
-            stmt.setString(2, cliente.getCpf());
-            stmt.setDate(3, Date.valueOf(cliente.getDataNascimento()));
-            stmt.setString(4, cliente.getTelefone());
-            stmt.setString(5, cliente.getEmail());
-            stmt.setString(6, cliente.getEndereco());
-            stmt.setInt(7, cliente.getId());
-
-            stmt.executeUpdate();
-
-        } catch (SQLException erro) {
-            System.out.println("Erro ao atualizar cliente: "
-                    + erro.getMessage());
+            stmt.execute();
+        } catch (SQLException e) {
+            throw new RuntimeException("Erro ao editar cliente: " + e.getMessage(), e);
         }
     }
-    
-    
-    
-    
-    public void excluir(int id) {
 
-        String sql = "DELETE FROM clientes WHERE id = ?";
-
-        try {
-            Connection con = ConnectionFactory.getConnection();
-            PreparedStatement stmt = con.prepareStatement(sql);
-
-            stmt.setInt(1, id);
-
-            stmt.executeUpdate();
-
-        } catch (SQLException erro) {
-            System.out.println("Erro ao excluir cliente: "
-                    + erro.getMessage());
+    // 3. EXCLUIR
+    public void excluirCliente(String cpf) {
+        String sql = "DELETE FROM clientes WHERE cpf = ?";
+        try (PreparedStatement stmt = conexao.prepareStatement(sql)) {
+            stmt.setString(1, cpf);
+            stmt.execute();
+        } catch (SQLException e) {
+            throw new RuntimeException("Erro ao excluir cliente: " + e.getMessage(), e);
         }
     }
 }

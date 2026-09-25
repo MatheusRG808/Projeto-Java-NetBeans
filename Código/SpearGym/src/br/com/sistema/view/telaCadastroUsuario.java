@@ -34,13 +34,17 @@ public class telaCadastroUsuario extends javax.swing.JFrame {
 
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
-        txtUsuario = new javax.swing.JTextField();
+        txtNome = new javax.swing.JTextField();
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
-        chkAtivo = new javax.swing.JTextField();
+        txtAtivo = new javax.swing.JTextField();
         botLimpar = new javax.swing.JButton();
         botSalvar = new javax.swing.JButton();
         txtSenha = new javax.swing.JPasswordField();
+        jLabel5 = new javax.swing.JLabel();
+        txtId = new javax.swing.JTextField();
+        botLimpar1 = new javax.swing.JButton();
+        botLimpar2 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -50,7 +54,7 @@ public class telaCadastroUsuario extends javax.swing.JFrame {
 
         jLabel2.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel2.setText("Usuário:");
+        jLabel2.setText("Nome:");
 
         jLabel3.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         jLabel3.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -62,6 +66,11 @@ public class telaCadastroUsuario extends javax.swing.JFrame {
 
         botLimpar.setFont(new java.awt.Font("Times New Roman", 1, 24)); // NOI18N
         botLimpar.setText("Limpar");
+        botLimpar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                botLimparActionPerformed(evt);
+            }
+        });
 
         botSalvar.setFont(new java.awt.Font("Times New Roman", 1, 24)); // NOI18N
         botSalvar.setText("Salvar");
@@ -77,36 +86,67 @@ public class telaCadastroUsuario extends javax.swing.JFrame {
             }
         });
 
+        jLabel5.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        jLabel5.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel5.setText("ID:");
+
+        botLimpar1.setFont(new java.awt.Font("Times New Roman", 1, 24)); // NOI18N
+        botLimpar1.setText("Excluir");
+        botLimpar1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                botLimpar1ActionPerformed(evt);
+            }
+        });
+
+        botLimpar2.setFont(new java.awt.Font("Times New Roman", 1, 24)); // NOI18N
+        botLimpar2.setText("Editar");
+        botLimpar2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                botLimpar2ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(85, Short.MAX_VALUE)
-                .addComponent(jLabel1)
-                .addGap(85, 85, 85))
-            .addGroup(layout.createSequentialGroup()
-                .addGap(32, 32, 32)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                        .addGroup(layout.createSequentialGroup()
-                            .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 57, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                            .addComponent(txtSenha, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGroup(layout.createSequentialGroup()
-                            .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 57, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                            .addComponent(txtUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 57, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGap(32, 32, 32)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
-                                .addComponent(botLimpar, javax.swing.GroupLayout.PREFERRED_SIZE, 131, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(46, 46, 46)
-                                .addComponent(botSalvar, javax.swing.GroupLayout.PREFERRED_SIZE, 131, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(chkAtivo, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addContainerGap(93, Short.MAX_VALUE))
+                                .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 57, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(txtAtivo, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addGroup(layout.createSequentialGroup()
+                                                .addComponent(botLimpar, javax.swing.GroupLayout.PREFERRED_SIZE, 131, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                .addGap(46, 46, 46)
+                                                .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 57, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                            .addComponent(botLimpar2, javax.swing.GroupLayout.PREFERRED_SIZE, 131, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(botSalvar, javax.swing.GroupLayout.PREFERRED_SIZE, 131, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addComponent(txtId, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addComponent(botLimpar1, javax.swing.GroupLayout.PREFERRED_SIZE, 131, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                .addGroup(layout.createSequentialGroup()
+                                    .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 57, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                    .addComponent(txtSenha, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGroup(layout.createSequentialGroup()
+                                    .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 57, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                    .addComponent(txtNome, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                        .addGap(0, 21, Short.MAX_VALUE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jLabel1)
+                        .addGap(62, 62, 62)))
+                .addGap(23, 23, 23))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -116,20 +156,26 @@ public class telaCadastroUsuario extends javax.swing.JFrame {
                 .addGap(37, 37, 37)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txtUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                    .addComponent(txtNome, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtId, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(9, 9, 9)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, 25, Short.MAX_VALUE)
                     .addComponent(txtSenha))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(chkAtivo, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(43, 43, 43)
+                    .addComponent(txtAtivo, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(botLimpar, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(botSalvar, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(39, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(botLimpar1, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(botLimpar2, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(14, Short.MAX_VALUE))
         );
 
         pack();
@@ -138,7 +184,7 @@ public class telaCadastroUsuario extends javax.swing.JFrame {
     private void botSalvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botSalvarActionPerformed
         // TODO add your handling code here:
         // 1. Validar campos
-    if (txtUsuario.getText().trim().isEmpty() || new String(txtSenha.getPassword()).trim().isEmpty()) {
+    if (txtNome.getText().trim().isEmpty() || new String(txtSenha.getPassword()).trim().isEmpty()) {
         JOptionPane.showMessageDialog(this, "Preencha o Usuário e a Senha.");
         return;
     }
@@ -146,7 +192,7 @@ public class telaCadastroUsuario extends javax.swing.JFrame {
     try {
         // 2. Criar objeto Usuario
         Usuario obj = new Usuario();
-        obj.setUsuario(txtUsuario.getText().trim());
+        obj.setNome(txtNome.getText().trim());
         obj.setSenha(new String(txtSenha.getPassword()).trim());
         
         // Se chkAtivo for JCheckBox use isSelected(), se for JTextField use o texto
@@ -159,9 +205,9 @@ public class telaCadastroUsuario extends javax.swing.JFrame {
         JOptionPane.showMessageDialog(this, "Usuário cadastrado com sucesso!");
 
    
-        txtUsuario.setText("");
+        txtNome.setText("");
         txtSenha.setText("");
-        txtUsuario.requestFocus();
+        txtNome.requestFocus();
 
     } catch (Exception e) {
         JOptionPane.showMessageDialog(this, "Erro ao cadastrar usuário: " + e.getMessage());
@@ -171,6 +217,19 @@ public class telaCadastroUsuario extends javax.swing.JFrame {
     private void txtSenhaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtSenhaActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_txtSenhaActionPerformed
+
+    private void botLimparActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botLimparActionPerformed
+        // TODO add your handling code here:
+        limparCampos();
+    }//GEN-LAST:event_botLimparActionPerformed
+
+    private void botLimpar1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botLimpar1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_botLimpar1ActionPerformed
+
+    private void botLimpar2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botLimpar2ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_botLimpar2ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -209,13 +268,72 @@ public class telaCadastroUsuario extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton botLimpar;
+    private javax.swing.JButton botLimpar1;
+    private javax.swing.JButton botLimpar2;
     private javax.swing.JButton botSalvar;
-    private javax.swing.JTextField chkAtivo;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
+    private javax.swing.JTextField txtAtivo;
+    private javax.swing.JTextField txtId;
+    private javax.swing.JTextField txtNome;
     private javax.swing.JPasswordField txtSenha;
-    private javax.swing.JTextField txtUsuario;
     // End of variables declaration//GEN-END:variables
+
+    // Método auxiliar obrigatório para redefinir a interface
+private void limparCampos() {
+    txtId.setText("");
+    txtNome.setText("");
+    txtSenha.setText("");
+    txtAtivo.setText(""); // Ou txtEmail se alterou o nome
+    txtNome.requestFocus();
+}
+
+// Evento do Botão SALVAR
+private void btnSalvarActionPerformed(java.awt.event.ActionEvent evt) {
+   Usuario obj = new Usuario();
+    obj.setNome(txtNome.getText());
+    obj.setSenha(new String(txtSenha.getPassword()));
+    obj.setEmail(txtAtivo.getText());
+
+    UsuarioDAO dao = new UsuarioDAO();
+    dao.cadastrarUsuario(obj);
+
+    JOptionPane.showMessageDialog(null, "Usuário salvo com sucesso!");
+    limparCampos();
+}
+
+// Evento do Botão EDITAR
+private void btnEditarActionPerformed(java.awt.event.ActionEvent evt) {
+   Usuario obj = new Usuario();
+    obj.setId(Integer.parseInt(txtId.getText()));
+    obj.setNome(txtNome.getText());
+    obj.setSenha(new String(txtSenha.getPassword()));
+    obj.setEmail(txtAtivo.getText());
+
+    UsuarioDAO dao = new UsuarioDAO();
+    dao.editarUsuario(obj);
+
+    JOptionPane.showMessageDialog(null, "Usuário alterado com sucesso!");
+    limparCampos();
+}
+
+// Evento do Botão EXCLUIR
+private void btnExcluirActionPerformed(java.awt.event.ActionEvent evt) {
+    int id = Integer.parseInt(txtId.getText());
+
+    UsuarioDAO dao = new UsuarioDAO();
+    dao.excluirUsuario(id);
+
+    JOptionPane.showMessageDialog(null, "Usuário excluído com sucesso!");
+    limparCampos();
+
+}
+
+// Evento do Botão LIMPAR
+private void btnLimparActionPerformed(java.awt.event.ActionEvent evt) {
+    limparCampos();
+}
 }
