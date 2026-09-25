@@ -3,26 +3,21 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-<<<<<<< HEAD
-            <file>file:/C:/Users/mack0/OneDrive/Documentos/Projeto%20Spear%20Gym/Projeto-Java-NetBeans/Código/SpearGym/src/br/com/sistema/jdbc/ConnectionFactory.java</file>
+            <file>file:/C:/Users/mack0/OneDrive/Documentos/Projeto%20Spear%20Gym/Projeto-Java-NetBeans/Código/SpearGym/src/br/com/sistema/view/FrmMenu.java</file>
             <file>file:/C:/Users/mack0/OneDrive/Documentos/Projeto%20Spear%20Gym/Projeto-Java-NetBeans/Código/SpearGym/src/br/com/sistema/main/Main.java</file>
             <file>file:/C:/Users/mack0/OneDrive/Documentos/Projeto%20Spear%20Gym/Projeto-Java-NetBeans/Código/SpearGym/src/br/com/sistema/model/Cliente.java</file>
-            <file>file:/C:/Users/mack0/OneDrive/Documentos/Projeto%20Spear%20Gym/Projeto-Java-NetBeans/Código/SpearGym/src/br/com/sistema/model/Usuario.java</file>
+            <file>file:/C:/Users/mack0/OneDrive/Documentos/Projeto%20Spear%20Gym/Projeto-Java-NetBeans/Código/SpearGym/src/br/com/sistema/view/FrmLogin.java</file>
             <file>file:/C:/Users/mack0/OneDrive/Documentos/Projeto%20Spear%20Gym/Projeto-Java-NetBeans/Código/SpearGym/src/br/com/sistema/model/FichaTreino.java</file>
+            <file>file:/C:/Users/mack0/OneDrive/Documentos/Projeto%20Spear%20Gym/Projeto-Java-NetBeans/Código/SpearGym/src/br/com/sistema/model/Usuario.java</file>
             <file>file:/C:/Users/mack0/OneDrive/Documentos/Projeto%20Spear%20Gym/Projeto-Java-NetBeans/Código/SpearGym/src/br/com/sistema/dao/FichaTreinoDAO.java</file>
-            <file>file:/C:/Users/mack0/OneDrive/Documentos/Projeto%20Spear%20Gym/Projeto-Java-NetBeans/Código/SpearGym/src/br/com/sistema/model/DiaTreino.java</file>
             <file>file:/C:/Users/mack0/OneDrive/Documentos/Projeto%20Spear%20Gym/Projeto-Java-NetBeans/Código/SpearGym/src/br/com/sistema/dao/ClienteDAO.java</file>
+            <file>file:/C:/Users/mack0/OneDrive/Documentos/Projeto%20Spear%20Gym/Projeto-Java-NetBeans/Código/SpearGym/src/br/com/sistema/model/DiaTreino.java</file>
+            <file>file:/C:/Users/mack0/OneDrive/Documentos/Projeto%20Spear%20Gym/Projeto-Java-NetBeans/Código/SpearGym/src/br/com/sistema/view/FrmListaCliente.java</file>
             <file>file:/C:/Users/mack0/OneDrive/Documentos/Projeto%20Spear%20Gym/Projeto-Java-NetBeans/Código/SpearGym/src/br/com/sistema/dao/UsuarioDAO.java</file>
-            <file>file:/C:/Users/mack0/OneDrive/Documentos/Projeto%20Spear%20Gym/Projeto-Java-NetBeans/Código/SpearGym/src/br/com/sistema/utils/ValidacaoUtil.java</file>
-            <file>file:/C:/Users/mack0/OneDrive/Documentos/Projeto%20Spear%20Gym/Projeto-Java-NetBeans/Código/SpearGym/src/br/com/sistema/image/buscar.png</file>
-            <file>file:/C:/Users/mack0/OneDrive/Documentos/Projeto%20Spear%20Gym/Projeto-Java-NetBeans/Código/SpearGym/src/br/com/sistema/utils/TreinoJsonUtil.java</file>
-            <file>file:/C:/Users/mack0/OneDrive/Documentos/Projeto%20Spear%20Gym/Projeto-Java-NetBeans/Código/SpearGym/src/br/com/sistema/utils/Constantes.java</file>
+            <file>file:/C:/Users/mack0/OneDrive/Documentos/Projeto%20Spear%20Gym/Projeto-Java-NetBeans/Código/SpearGym/src/br/com/sistema/view/telaLogin.java</file>
+            <file>file:/C:/Users/mack0/OneDrive/Documentos/Projeto%20Spear%20Gym/Projeto-Java-NetBeans/Código/SpearGym/src/br/com/sistema/view/telaCadastroUsuario.java</file>
+            <file>file:/C:/Users/mack0/OneDrive/Documentos/Projeto%20Spear%20Gym/Projeto-Java-NetBeans/Código/SpearGym/src/br/com/sistema/view/telaCadastroCliente.java</file>
             <file>file:/C:/Users/mack0/OneDrive/Documentos/Projeto%20Spear%20Gym/Projeto-Java-NetBeans/Código/SpearGym/src/br/com/sistema/view/FrmFichaTreino.java</file>
-=======
-            <file>file:/C:/Users/Acer/OneDrive/Documentos/NetBeansProjects/Projeto-Java-NetBeans/Código/Projeto-Java-NetBeans/Código/SpearGym/src/br/com/sistema/dao/UsuarioDAO.java</file>
-            <file>file:/C:/Users/Acer/OneDrive/Documentos/NetBeansProjects/Projeto-Java-NetBeans/Código/Projeto-Java-NetBeans/Código/SpearGym/src/br/com/sistema/dao/ClienteDAO.java</file>
-            <file>file:/C:/Users/Acer/OneDrive/Documentos/NetBeansProjects/Projeto-Java-NetBeans/Código/Projeto-Java-NetBeans/Código/SpearGym/src/br/com/sistema/view/telaCadastroUsuario.java</file>
->>>>>>> c8618de8d2237ae5ace427994bf5077866c7585a
         </group>
     </open-files>
 </project-private>

@@ -12,9 +12,9 @@ package br.com.sistema.view;
 class FrmMenu extends javax.swing.JFrame{
 
    private void menuClientesActionPerformed(java.awt.event.ActionEvent evt) {
-    telaCadastroCliente telaCliente = new telaCadastroCliente();
-    telaCliente.setVisible(true);
-}
+        FrmCliente telaCliente = new FrmCliente();
+        telaCliente.setVisible(true);
+    }
     
     
 }

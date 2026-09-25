@@ -323,6 +323,37 @@ public class ClienteDAO {
         }
     }
 
+    public void excluirPorCpf(String cpf) {
+        String sql =
+                "DELETE FROM clientes "
+                + "WHERE cpf = ?";
+
+        try {
+            Connection con =
+                    ConnectionFactory.getConnection();
+
+            PreparedStatement stmt =
+                    con.prepareStatement(sql);
+
+            stmt.setString(
+                    1,
+                    cpf
+            );
+
+            stmt.executeUpdate();
+
+            stmt.close();
+            con.close();
+
+        } catch (SQLException erro) {
+
+            System.out.println(
+                    "Erro ao excluir cliente: "
+                    + erro.getMessage()
+            );
+        }
+    }
+    
     // =========================================================
     // CRIAR OBJETO CLIENTE A PARTIR DO RESULTSET
     // =========================================================
