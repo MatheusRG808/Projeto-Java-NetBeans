@@ -131,24 +131,24 @@ public class telaLogin extends javax.swing.JFrame {
     // 3. Método de autenticação com o banco de dados
     private void efetuarLogin() {
         String usuario = txtUsuario.getText().trim();
-    String senha = new String(txtSenha.getPassword()).trim();
+        String senha = new String(txtSenha.getPassword()).trim();
 
-    try {
-        UsuarioDAO dao = new UsuarioDAO();
-        Usuario usuarioLogado = dao.efetuarLogin(usuario, senha);
+        try {
+            UsuarioDAO dao = new UsuarioDAO();
+            Usuario usuarioLogado = dao.efetuarLogin(usuario, senha);
 
-        if (usuarioLogado != null) {
-            JOptionPane.showMessageDialog(this, "Bem-vindo(a), " + usuarioLogado.getNome() + "!");
-            this.dispose();
+            if (usuarioLogado != null) {
+                JOptionPane.showMessageDialog(this, "Bem-vindo(a), " + usuarioLogado.getNome() + "!");
+                this.dispose();
 
-            FrmMenu frmMenu = new FrmMenu();
-            frmMenu.setVisible(true);
-        } else {
-            JOptionPane.showMessageDialog(this, "Usuário ou senha inválidos!");
+                FrmMenu frmMenu = new FrmMenu();
+                frmMenu.setVisible(true);
+            } else {
+                JOptionPane.showMessageDialog(this, "Usuário ou senha inválidos!");
+            }
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(this, "Erro ao realizar login: " + e.getMessage());
         }
-    } catch (Exception e) {
-        JOptionPane.showMessageDialog(this, "Erro ao realizar login: " + e.getMessage());
-    }
     }//GEN-LAST:event_botLoginActionPerformed
 
     /**
