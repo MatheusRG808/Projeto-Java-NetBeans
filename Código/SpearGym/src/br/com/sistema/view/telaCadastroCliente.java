@@ -246,7 +246,7 @@ private void btnSalvarActionPerformed(java.awt.event.ActionEvent evt) {
     obj.setEndereco(txtEndereco.getText().trim());
 
     ClienteDAO dao = new ClienteDAO();
-    dao.cadastrarCliente(obj);
+    dao.salvar(obj);
 
     JOptionPane.showMessageDialog(this, "Cliente cadastrado com sucesso!");
     limparCampos();
@@ -263,7 +263,7 @@ private void btnEditarActionPerformed(java.awt.event.ActionEvent evt) {
     obj.setEndereco(txtEndereco.getText().trim());
 
     ClienteDAO dao = new ClienteDAO();
-    dao.editarCliente(obj);
+    dao.salvar(obj);
 
     JOptionPane.showMessageDialog(this, "Cliente editado com sucesso!");
     limparCampos();
@@ -279,7 +279,7 @@ private void btnExcluirActionPerformed(java.awt.event.ActionEvent evt) {
     }
 
     ClienteDAO dao = new ClienteDAO();
-    dao.excluirCliente(cpf);
+    dao.excluir(cpf);
 
     JOptionPane.showMessageDialog(this, "Cliente excluído com sucesso!");
     limparCampos();
